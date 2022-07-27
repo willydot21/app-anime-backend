@@ -3,18 +3,23 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import properties from '../services/properties.js';
-import routes from '../routes/routes.js';
-import setup_database from '../services/database.js';
-import { verifyToken } from './utils.js';
+import routes from './routes/routes.js';
+import setupDatabase from './services/database.js';
+import { verifyToken } from './services/utils.js';
+import path from 'path';
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path:path.join(__dirname, '../.env')
+});
 
 const app = express();
-const port = properties.port;
+const port = process.env.PORT || 3000;
 const bodyParserJson = bodyParser.json();
 const bodyParserUrlEncoded = bodyParser.urlencoded({extended:true});
 const whiteList = ['http://localhost:3000', 'http://localhost:3001'];
 
-setup_database();
+setupDatabase();
 
 app.use(cookieParser());
 
@@ -27,11 +32,13 @@ app.use(bodyParserJson);
 
 app.use(bodyParserUrlEncoded);
 
-app.use('/dashboard', verifyToken, routes.dashboard);
+app.use('/auth', verifyToken, routes.auth);
 
 app.use('/register', routes.register);
 
 app.use('/login', routes.login);
+
+app.use('/logout', routes.logout);
 
 app.use((_req, res, _next) => {
   res.status(404).end();

@@ -3,10 +3,9 @@ import mongoose from 'mongoose';
 import userSchema from '../../schemas/user';
 
 userSchema.statics = {
-  create: async function(data, cb) {
-    // cb is callback
+  create: async function(data, callback) {
     const user = new this(data);
-    await user.save(cb);
+    await user.save(callback);
   }
 }
 

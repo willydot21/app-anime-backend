@@ -1,6 +1,6 @@
 
 import express from 'express';
-import { getAndDeleteById, getUserById } from '../models/user/user.controller';
+import { getAndDeleteById, getUserById, updateById } from '../models/user/user.controller';
 import { RequestProps } from '../@types';
 
 const router = express.Router();
@@ -13,28 +13,22 @@ router.get('/',(req:RequestProps, res) => {
       message: 'This route is private.',
       user: req.user
     }
-  });
+  }).end();
 
 });
 
-router.get('/profile', async (req:RequestProps, res) => {
+router.get('/user', async (req:RequestProps, res) => {
 
   const user = await getUserById(req.user.id);
 
   res.json({
     error: null,
     data: user
-  });
+  }).end();
 
 });
 
-router.post('/profile', async (req:RequestProps, res) => {
-
-  const user = await getUserById(req.user.id);
-
-});
-
-router.delete('/profile', async (req:RequestProps, res) => {
+router.delete('/user', async (req:RequestProps, res) => {
 
   await getAndDeleteById(req.user.id);
 

@@ -1,7 +1,7 @@
 
 import userModel from './user.dao';
 import bcryptjs from 'bcryptjs';
-import { generateToken, handlerValidateCredentials } from '../../src/utils';
+import { generateToken, handlerValidateCredentials } from '../../services/utils';
 import { Request, Response } from 'express';
 
 export function createUser (req:Request, res:Response) {
@@ -43,10 +43,9 @@ export function createUser (req:Request, res:Response) {
 
     res.status(200).cookie('auth_token', accessToken, { 
       httpOnly: true, 
-      expires: new Date(Date.now() + 30 * 1000), // 30 seconds
       path: '*',
       sameSite: 'lax',
-      secure: false
+      secure: process.env.PRODUCTION
     }).json({ error:null, data }).end();
 
   });
@@ -85,11 +84,10 @@ export async function loginUser (req:Request, res:Response) {
   }
 
   res.status(200).cookie('auth_token', accessToken, {
-    httpOnly: true, 
-    expires: new Date(Date.now() + 60 * 5 * 1000), // 5 minutes
+    httpOnly: true,
     path: '*',
     sameSite: 'lax',
-    secure: false
+    secure: process.env.PRODUCTION
   }).json({ error:null, data }).end();
 
 }
@@ -106,4 +104,10 @@ export async function getAndDeleteById (id:string | undefined) {
 
   await userModel.findByIdAndDelete(id || '').exec();
   
+}
+
+export async function updateById (id:string | undefined, prop:any) {
+
+  await userModel.findByIdAndUpdate(id, prop).exec();
+
 }

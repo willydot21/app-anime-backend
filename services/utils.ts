@@ -2,11 +2,8 @@
 import { RequestProps } from '../@types/index.js';
 import { NextFunction, Response } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
-import properties from '../services/properties.js';
 
 const jwt = jsonwebtoken;
-
-const __KEY = "pw>9x5~'=NC%NW-(";
 
 const parseCookie = (str: string) => (
   str
@@ -20,10 +17,10 @@ const parseCookie = (str: string) => (
 
 
 export function generateToken(user: any) {
-  const accessToken = jwt.sign({ id: user._id }, __KEY, {
+  const accessToken = jwt.sign({ id: user._id }, process.env.TOKEN_KEY, {
     expiresIn: '1m' // 1 minute 
   });
-  const refreshToken = jwt.sign({ email: user.email }, properties.__REFRESH_KEY, {
+  const refreshToken = jwt.sign({ email: user.email }, process.env.REFRESH_KEY, {
     expiresIn: '30d'
   });
   return {
@@ -82,7 +79,7 @@ export function verifyToken(req: RequestProps, res: Response, next: NextFunction
       return res.status(401).json({ error: 'Access denied.', code: 'AD403' });
     }
 
-    const verified = jwt.verify(token, __KEY);
+    const verified = jwt.verify(token, process.env.TOKEN_KEY);
 
     req.user = verified;
 

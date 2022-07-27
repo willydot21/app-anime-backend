@@ -1,6 +1,5 @@
 
 import mongoose from 'mongoose';
-import properties from './properties';
 
 function closeDatabase() {
   mongoose.connection.close(() => {
@@ -11,11 +10,11 @@ function closeDatabase() {
 
 async function setupDatabase() {
   try {
-    await mongoose.connect(properties.database);
+    await mongoose.connect(process.env.DATABASE);
     console.log('Database is connected.');
   }
   catch (error) {
-    console.log('[**DATABASE ERROR**]', error);
+    console.log('### DATABASE ERROR ###', error);
   }
   finally {
     process.on('SIGINT', closeDatabase);

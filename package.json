@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/src/app.js",
+  "main": "dist/server.js",
   "scripts": {
     "build": "tsc && cp .env dist/.env",
-    "start": "tsc && node dist/src/app.js",
+    "start": "tsc && node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
