@@ -25,6 +25,6 @@ const animeInfoSchema = new Schema({
     required: false
   }
 
-}, {id: false});
+}, { id: false });
 
 export default animeInfoSchema;

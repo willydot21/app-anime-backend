@@ -2,6 +2,7 @@
 import { RequestProps } from '../@types/index.js';
 import { NextFunction, Response } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
+import userModel from '../models/user/user.dao.js';
 
 const jwt = jsonwebtoken;
 
@@ -17,16 +18,39 @@ const parseCookie = (str: string) => (
 
 
 export function generateToken(user: any) {
+
   const accessToken = jwt.sign({ id: user._id }, process.env.TOKEN_KEY, {
-    expiresIn: '1m' // 1 minute 
+    expiresIn: '5m'
   });
+
   const refreshToken = jwt.sign({ email: user.email }, process.env.REFRESH_KEY, {
     expiresIn: '30d'
   });
-  return {
-    accessToken,
-    refreshToken
-  };
+
+  return { accessToken, refreshToken }
+
+}
+
+export async function generateRefreshToken(refreshToken: string) {
+
+  const verified = jwt.verify(refreshToken, process.env.REFRESH_KEY);
+
+  if (!(verified as { email: string }).email) {
+
+    throw new Error('Access denied');
+
+  }
+
+  const email = (verified as { email: string }).email;
+
+  const user = await userModel.findOne({
+    email
+  });
+
+  const newTokens = generateToken(user);
+
+  return newTokens;
+
 }
 
 export function validateEmail(email: string) {
@@ -95,3 +119,5 @@ export function verifyToken(req: RequestProps, res: Response, next: NextFunction
   }
 
 }
+
+export const userPlaylists = ['watched', 'watching', 'considering', 'animeHistory'];

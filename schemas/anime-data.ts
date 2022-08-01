@@ -8,7 +8,7 @@ export const animeDataSchema = new Schema({
 
   episodes: [Number]
 
-}, {id: false});
+}, { id: false });
 
 
 export const animeArticleSchema = new Schema({
@@ -31,4 +31,4 @@ export const animeArticleSchema = new Schema({
     trim: true
   }
 
-}, {id: false});
+}, { id: false });

@@ -1,5 +1,4 @@
-
-import { Request } from 'express';
+import { Request } from "express";
 
 declare global {
   namespace NodeJS {
@@ -14,5 +13,30 @@ declare global {
 }
 
 export interface RequestProps extends Request {
-  user?: any
+  user?: any;
+}
+
+export interface AnimeArticle {
+  title: string;
+  id: string;
+  poster: string;
+}
+
+export interface UserAnimeInfo {
+  watched: AnimeArticle | [];
+  watching: AnimeArticle | [];
+  considering: AnimeArticle | [];
+  animeHistory: AnimeData[] | [];
+}
+
+export interface User {
+  username: string;
+  email: string;
+  password: string;
+  userAnimeInfo: UserAnimeInfo;
+}
+
+export interface AnimeEpisodesUpdateParams {
+  animeid: string;
+  episode: number;
 }
