@@ -34,8 +34,6 @@ app.use(bodyParserJson);
 
 app.use(bodyParserUrlEncoded);
 
-app.use('/test/playlist', routes.test);
-
 app.use("/auth/user/animeinfo", verifyToken, routes.authAnimeInfo);
 
 app.use("/auth/user", verifyToken, routes.authUser);

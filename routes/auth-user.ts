@@ -1,8 +1,7 @@
 
 import express from 'express';
-import { getAndDeleteById, getUserById } from '../models/user/user.controller';
+import { getAndDeleteById, getUserById } from '../models/user/user-services/utils';
 import { RequestProps } from '../@types';
-import { generateRefreshToken } from '../services/utils';
 
 const router = express.Router();
 

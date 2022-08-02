@@ -17,16 +17,21 @@ export interface RequestProps extends Request {
 }
 
 export interface AnimeArticle {
-  title: string;
+  name: string;
   id: string;
   poster: string;
 }
 
+export interface AnimeData {
+  id: string;
+  episodes: number[];
+}
+
 export interface UserAnimeInfo {
-  watched: AnimeArticle | [];
-  watching: AnimeArticle | [];
-  considering: AnimeArticle | [];
-  animeHistory: AnimeData[] | [];
+  watched: AnimeArticle[];
+  watching: AnimeArticle[];
+  considering: AnimeArticle[];
+  animeHistory: AnimeData[];
 }
 
 export interface User {

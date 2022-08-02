@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 export const animeDataSchema = new Schema({
 
-  id: { type: String, trim: true },
+  id: { type: String, trim: true, unique: true },
 
   episodes: [Number]
 
@@ -16,19 +16,22 @@ export const animeArticleSchema = new Schema({
   title: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    unique: true
   },
 
   id: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    unique: true
   },
 
   poster: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    unique: true
   }
 
 }, { id: false });
