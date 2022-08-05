@@ -27,7 +27,13 @@ export interface AnimeData {
   episodes: number[];
 }
 
+export interface AnimeFollowingItem {
+  id: string;
+  playlist: string[];
+}
+
 export interface UserAnimeInfo {
+  animeDataPlaylist: AnimeDataPlaylist
   watched: AnimeArticle[];
   watching: AnimeArticle[];
   considering: AnimeArticle[];

@@ -1,9 +1,14 @@
 
 import mongoose from "mongoose";
-import { animeArticleSchema, animeDataSchema } from "./anime-data";
+import { animeArticleSchema, animeDataSchema, animeFollowing } from "./anime-data";
 const { Schema } = mongoose;
 
 const animeInfoSchema = new Schema({
+
+  following: {
+    type: [animeFollowing],
+    required: false
+  },
 
   watched: {
     type: [animeArticleSchema],

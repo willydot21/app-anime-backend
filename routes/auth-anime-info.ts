@@ -1,7 +1,7 @@
 
 import express from 'express';
-import userHistory from './auth-anime-info/history';
-import userPlaylist from './auth-anime-info/playlist'
+import userHistory from './auth-anime-info-services/history';
+import userPlaylist from './auth-anime-info-services/playlist'
 
 const router = express.Router();
 

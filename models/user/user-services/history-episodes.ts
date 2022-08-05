@@ -75,3 +75,11 @@ export async function getUserHistory(userId: string) {
   return userData.userAnimeInfo.animeHistory;
 
 }
+
+export async function getAnimeHistory(userId: string, animeid: string) {
+
+  const history = await getUserHistory(userId);
+
+  return history.filter(item => item.id === animeid);
+
+}

@@ -2,6 +2,14 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
+export const animeFollowing = new Schema({
+
+  id: { type: String, trim: true, unique: true },
+
+  playlist: { type: [String], trim: true }
+
+}, { id: false });
+
 export const animeDataSchema = new Schema({
 
   id: { type: String, trim: true, unique: true },
@@ -9,7 +17,6 @@ export const animeDataSchema = new Schema({
   episodes: [Number]
 
 }, { id: false });
-
 
 export const animeArticleSchema = new Schema({
 

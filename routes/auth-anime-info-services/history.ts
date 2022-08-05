@@ -1,7 +1,7 @@
 
 import express from 'express';
 import { RequestProps, AnimeEpisodesUpdateParams } from '../../@types';
-import { addAnimeEpisodeHistory, getUserHistory, removeAnimeEpisodeHistory } from '../../models/user/user-services/history-episodes';
+import { addAnimeEpisodeHistory, getAnimeHistory, getUserHistory, removeAnimeEpisodeHistory } from '../../models/user/user-services/history-episodes';
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.get('/', async (req: RequestProps, res) => {
 
     const history = await getUserHistory(req.user.id);
 
-    return res.json(history).end();
+    return res.json({ success: true, data: history }).end();
 
   } catch (error) {
 
@@ -23,7 +23,28 @@ router.get('/', async (req: RequestProps, res) => {
 
   }
 
-})
+});
+
+router.get('/:animeid', async (req: RequestProps, res) => {
+
+  try {
+
+    const animeid = req.params.animeid;
+
+    const data = await getAnimeHistory(req.user.id, animeid);
+
+    return res.json({ success: true, data }).end();
+
+  } catch (error) {
+
+    return res.status(500).json({
+      error: true,
+      data: 'Internal server error: ' + error
+    });
+
+  }
+
+});
 
 router.post('/episodes/add', async (req: RequestProps, res) => {
 

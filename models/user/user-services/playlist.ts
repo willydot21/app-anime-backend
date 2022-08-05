@@ -1,6 +1,6 @@
 
 import userModel from "../user.dao";
-import { AnimeArticle } from "../../../@types";
+import { AnimeArticle, AnimeFollowingItem } from "../../../@types";
 
 export async function getPlaylist(userId: string, playlist: string) {
 

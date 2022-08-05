@@ -20,7 +20,7 @@ const parseCookie = (str: string) => (
 export function generateToken(user: any) {
 
   const accessToken = jwt.sign({ id: user._id }, process.env.TOKEN_KEY, {
-    expiresIn: '5m'
+    expiresIn: '30s'
   });
 
   const refreshToken = jwt.sign({ email: user.email }, process.env.REFRESH_KEY, {
@@ -62,7 +62,6 @@ export function validatePassword(password: string) {
   return (
     /[A-Z]/.test(password) && // at least one may. case.
     /[a-z]/.test(password) && // at least one min. case
-    /[0-9]/.test(password) && // at least one number case.
     password.length >= 6
   );
 }
@@ -91,13 +90,9 @@ export function verifyToken(req: RequestProps, res: Response, next: NextFunction
 
   try {
 
-    const headerSetCookie = req.header('Set-Cookie');
+    const headerCookie = parseCookie(req.headers['cookie'] || '');
 
-    const cookies: string[] = Array.isArray(headerSetCookie)
-      ? headerSetCookie
-      : [];
-
-    const token = parseCookie(cookies[0]).auth_token;
+    const token = headerCookie.auth_token;
 
     if (!token) {
       return res.status(401).json({ error: 'Access denied.', code: 'AD403' });

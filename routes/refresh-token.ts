@@ -15,7 +15,6 @@ router.post('/', async (req: RequestProps, res) => {
       const { refreshToken, accessToken } = await generateRefreshToken(req.body.refreshToken);
 
       return res
-        .clearCookie('auth_token')
         .cookie('auth_token', accessToken, cookieOptions)
         .json({ success: true, data: { refreshToken } })
         .end();
@@ -27,6 +26,8 @@ router.post('/', async (req: RequestProps, res) => {
     }
 
   }
+
+  return res.status(403).json({ error: true, data: 'Access denied' }).end();
 
 });
 

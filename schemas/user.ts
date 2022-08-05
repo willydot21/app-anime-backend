@@ -26,14 +26,15 @@ const userSchema = new Schema({
 
   userAnimeInfo: {
     type: animeInfoSchema,
-    default: { 
-      watched:[], 
-      watching:[], 
-      considering:[], 
-      animeHistory:[]
+    default: {
+      following: [],
+      watched: [],
+      watching: [],
+      considering: [],
+      animeHistory: []
     }
   }
 
-}, {timestamps: true} );
+}, { timestamps: true });
 
 export default userSchema;
