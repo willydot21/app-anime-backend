@@ -1,7 +1,7 @@
 
 import express from 'express';
 import { RequestProps } from '../../@types';
-import { addAnimeFollowingPlaylist } from '../../models/user/user-services/following';
+import { addAnimeFollowingPlaylist, removeAnimeFollowingPlaylist } from '../../models/user/user-services/following';
 import { addAnimeToPlaylist, getPlaylist, removeAnimeFromPlaylist } from '../../models/user/user-services/playlist';
 
 const router = express.Router();
@@ -78,8 +78,8 @@ router.delete('/:playlist/remove', async (req: RequestProps, res) => {
 
   if (playlist && req.body.id) {
 
-    await addAnimeFollowingPlaylist(req.body.id, playlist, req.user.id);
-    // add remove anime from following list
+    await removeAnimeFollowingPlaylist(req.body.id, playlist, req.user.id);
+    // remove anime from following list
 
     const data = await removeAnimeFromPlaylist(req.user.id, playlist, req.body.id);
 

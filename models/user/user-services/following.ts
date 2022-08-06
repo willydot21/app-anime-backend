@@ -137,4 +137,16 @@ export async function removeAnimeFromFollowing(userId: string, animeId: string) 
   } catch (error) { return { error: true, data: error as Error } }
 
 }
+
+export async function getFollowingList(userId: string) {
+
+  try {
+
+    const userFollowingList = await userModel.findById(userId).select('userAnimeInfo.following');
+
+    return { success: true, data: userFollowingList.userAnimeInfo.following };
+
+  } catch (error) { return { error: true, data: 'Internal exception has ocurred' } }
+
+}
 // 
