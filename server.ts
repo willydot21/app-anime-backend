@@ -18,7 +18,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const bodyParserJson = bodyParser.json();
 const bodyParserUrlEncoded = bodyParser.urlencoded({ extended: true });
-const whiteList = ["http://localhost:3000", "http://localhost:3001"];
+const whiteList = ["http://localhost:3000", "http://localhost:3001", 'https://kinghub-anime.netlify.app'];
 
 setupDatabase();
 
