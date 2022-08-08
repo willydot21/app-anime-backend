@@ -36,6 +36,8 @@ export function createUser(req: Request, res: Response) {
     }
     // checks if email exist.
 
+    console.log(err);
+
     if (err) {
       return res.status(500).json({ error: 'Server error', code: 'SE500' });
     }
@@ -43,10 +45,7 @@ export function createUser(req: Request, res: Response) {
 
     const { accessToken, refreshToken } = generateToken(user);
 
-    const data = {
-      email: user.email,
-      refreshToken
-    }
+    const data = { email: user.email, refreshToken }
 
     res.status(200)
       .cookie('auth_token', accessToken, cookieOptions)
