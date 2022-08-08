@@ -7,7 +7,7 @@ import { CookieOptions, Request, Response } from 'express';
 export const cookieOptions: CookieOptions = {
   httpOnly: true,
   path: '*',
-  sameSite: 'lax',
+  // sameSite: 'lax',
   secure: process.env.PRODUCTION
 }
 

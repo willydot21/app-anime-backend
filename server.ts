@@ -24,12 +24,7 @@ setupDatabase();
 
 app.use(cookieParser());
 
-app.use(
-  cors({
-    credentials: true,
-    origin: whiteList,
-  })
-);
+app.use(cors({ credentials: true, origin: whiteList }));
 
 app.use(bodyParserJson);
 
