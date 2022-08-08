@@ -4,7 +4,11 @@ const { Schema } = mongoose;
 
 export const animeFollowing = new Schema({
 
-  id: { type: String, trim: true, unique: true },
+  id: { type: String, trim: true },
+
+  poster: { type: String, trim: true },
+
+  name: { type: String, trim: true },
 
   playlist: { type: [String], trim: true }
 
@@ -12,7 +16,7 @@ export const animeFollowing = new Schema({
 
 export const animeDataSchema = new Schema({
 
-  id: { type: String, trim: true, unique: true },
+  id: { type: String, trim: true },
 
   episodes: [Number]
 
@@ -20,25 +24,22 @@ export const animeDataSchema = new Schema({
 
 export const animeArticleSchema = new Schema({
 
-  title: {
+  name: {
     type: String,
     required: true,
     trim: true,
-    unique: true
   },
 
   id: {
     type: String,
     required: true,
     trim: true,
-    unique: true
   },
 
   poster: {
     type: String,
     required: true,
     trim: true,
-    unique: true
   }
 
 }, { id: false });

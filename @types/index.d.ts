@@ -29,11 +29,13 @@ export interface AnimeData {
 
 export interface AnimeFollowingItem {
   id: string;
+  poster: string;
+  name: string;
   playlist: string[];
 }
 
 export interface UserAnimeInfo {
-  animeDataPlaylist: AnimeDataPlaylist
+  following: AnimeFollowingItem[]
   watched: AnimeArticle[];
   watching: AnimeArticle[];
   considering: AnimeArticle[];

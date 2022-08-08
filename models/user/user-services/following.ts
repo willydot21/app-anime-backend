@@ -1,6 +1,6 @@
 
 import userModel from '../user.dao';
-import { AnimeFollowingItem } from '../../../@types/index';
+import { AnimeArticle, AnimeFollowingItem } from '../../../@types/index';
 
 async function animeInFollowing(userId: string, animeId: string) {
 
@@ -16,13 +16,16 @@ async function animeInFollowing(userId: string, animeId: string) {
 }
 
 // playlist 
-export async function addAnimeFollowingPlaylist(animeId: string, playlist: string, userId: string) {
+export async function addAnimeFollowingPlaylist(animeItem: AnimeArticle, playlist: string, userId: string) {
 
-  const inFollowing = await animeInFollowing(userId, animeId);
+  const inFollowing = await animeInFollowing(userId, animeItem.id);
 
   if (!inFollowing) {
-    return addAnimeToFollowing(userId, { id: animeId, playlist: [playlist] });
+    return addAnimeToFollowing(userId, { playlist: [playlist], ...animeItem });
   };
+  // if not exist create one.
+
+  const animeId = animeItem.id;
 
   const matchPlaylist = {
     _id: userId,
@@ -145,6 +148,25 @@ export async function getFollowingList(userId: string) {
     const userFollowingList = await userModel.findById(userId).select('userAnimeInfo.following');
 
     return { success: true, data: userFollowingList.userAnimeInfo.following };
+
+  } catch (error) { return { error: true, data: 'Internal exception has ocurred' } }
+
+}
+
+export async function getFollowingAnime(userId: string, animeId: string) {
+
+  try {
+
+    const filterOptions = {
+      _id: userId,
+      'userAnimeInfo.following.id': animeId
+    }
+
+    const userFollowingList = await userModel.findOne(filterOptions).select('userAnimeInfo.following.$');
+
+    if (userFollowingList === null) return { success: true, data: 'Anime is not in following' }
+
+    return { success: true, data: userFollowingList.userAnimeInfo.following[0] };
 
   } catch (error) { return { error: true, data: 'Internal exception has ocurred' } }
 

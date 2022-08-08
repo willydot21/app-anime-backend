@@ -53,7 +53,7 @@ router.post('/:playlist/add', async (req: RequestProps, res) => {
 
   if (playlist && req.body.name && req.body.id && req.body.poster) {
 
-    await addAnimeFollowingPlaylist(req.body.id, playlist, req.user.id);
+    await addAnimeFollowingPlaylist(req.body, playlist, req.user.id);
     // add anime to following list
 
     const data = await addAnimeToPlaylist(req.user.id, playlist, req.body);

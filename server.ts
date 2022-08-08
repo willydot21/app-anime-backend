@@ -8,6 +8,7 @@ import setupDatabase from "./services/database.js";
 import { verifyToken } from "./services/utils.js";
 import path from "path";
 import dotenv from "dotenv";
+import { getFollowingAnime } from "./models/user/user-services/following.js";
 
 dotenv.config({
   path: path.join(__dirname, "../.env"),
