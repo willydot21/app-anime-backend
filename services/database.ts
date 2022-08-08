@@ -15,7 +15,6 @@ async function setupDatabase() {
   }
   catch (error) {
     console.log('### DATABASE ERROR ###', error);
-    console.log('[[[[[[[[[[[[[[[[[[[[[[[', process.env.DATABASE);
   }
   finally {
     process.on('SIGINT', closeDatabase);
