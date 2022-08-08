@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc && cp .env dist/.env",
-    "start": "tsc && node dist/server.js",
+    "build": "tsc && cp ./.env dist/.env",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
