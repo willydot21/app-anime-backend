@@ -15,6 +15,7 @@ async function setupDatabase() {
   }
   catch (error) {
     console.log('### DATABASE ERROR ###', error);
+    console.log(error);
   }
   finally {
     process.on('SIGINT', closeDatabase);

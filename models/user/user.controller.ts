@@ -36,8 +36,6 @@ export function createUser(req: Request, res: Response) {
     }
     // checks if email exist.
 
-    console.log(err);
-
     if (err) {
       return res.status(500).json({ error: 'Server error', code: 'SE500' });
     }
