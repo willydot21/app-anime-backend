@@ -31,7 +31,6 @@ export function createUser(req: Request, res: Response) {
 
   userModel.create(newUser, (err, user) => {
 
-    console.log(err);
     if (err && ((err as any).code === 11000)) {
       return res.status(409).json({ error: 'Email already exists.', code: 'EAE409' });
     }
