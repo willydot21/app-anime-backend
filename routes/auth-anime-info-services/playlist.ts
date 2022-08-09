@@ -34,7 +34,7 @@ router.get('/:playlist', async (req: RequestProps, res) => {
 
     const playlists = await getPlaylist(req.user.id, playlist);
 
-    res.json(playlists[playlist]).end();
+    res.json({ success: true, data: playlists[playlist] }).end();
 
   } catch (error) {
 
